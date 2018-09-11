@@ -1,0 +1,6 @@
+framework module Pods_WK1LB1Tests {
+  umbrella header "Pods-WK1LB1Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
