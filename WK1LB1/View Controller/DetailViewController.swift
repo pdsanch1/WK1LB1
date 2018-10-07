@@ -11,16 +11,22 @@ import UIKit
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var photoLabel: UILabel!
+    @IBOutlet weak var photoImageView: UIImageView!
+    
     var index: Int!
     var summary: String!
+    var photoUrl: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        summary = summary.replacingOccurrences(of: "“", with: "")
-        if let  idx = summary.index(of: ".") {
-            summary = String(summary[summary.startIndex..<idx]) + " !!"
-        }
-        print(summary)
+//        summary = summary.replacingOccurrences(of: "“", with: "")
+//        if let  idx = summary.index(of: ".") {
+//            summary = String(summary[summary.startIndex..<idx]) + " !!"
+//        }
+        //print(photoUrl)
+        let url = URL(string: photoUrl)
+        
+        photoImageView.af_setImage(withURL: url!)
         photoLabel.text = summary //("\(summary) at index \(index)")
     }
 

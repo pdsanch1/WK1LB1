@@ -95,16 +95,26 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         // Get the index path from the cell that was tapped
         let indexPath = tableView.indexPathForSelectedRow
         // Get the Row of the Index Path and set as index
-        let index = indexPath?.row
+        let index = indexPath?.section
         // Get in touch with the DetailViewController
         let detailViewController = segue.destination as! DetailViewController
         // Pass on the data to the Detail ViewController by setting it's indexPathRow value
-        let summary = posts[(indexPath?.row)!]["summary"] as! String
+        let summary = posts[(indexPath?.section)!]["summary"] as! String
+        let photo1 = posts[(indexPath?.section)!]["photos"] as! [[String: Any]]
+        let photo = photo1[0]
+        let originalSize = photo["original_size"] as! [String: Any]
+        let photoUrl = originalSize["url"] as! String
         detailViewController.index = index
         detailViewController.summary = summary
+        detailViewController.photoUrl = photoUrl
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return posts.count
     }
     
@@ -112,8 +122,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell") as! PhotoCell
         
-        let post = posts[indexPath.row]
-        
+        let post = posts[indexPath.section]
+        // posts[indexPath.row]
         // 1.            // 2.          // 3.
         if let photos = post["photos"] as? [[String: Any]] {
             // photos is NOT nil, we can use it!
